@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Bakery App</string>
+    <string name="type_of_order">Type of Order</string>
+    <string name="pickup_date">Pickup/Delivery Date</string>
+    <string name="pickup_time">Pickup/Delivery Time</string>
+    <string name="instruction">Do you have any additional information or instructions?</string>
+    <string name="message">Would you like to write a message? if yes please enter below:</string>
+    <string name="next">Next</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="icing">Icing</string>
+    <string name="double_dutch">Double Dutch</string>
+    <string name="marble">Marble</string>
+</resources>
