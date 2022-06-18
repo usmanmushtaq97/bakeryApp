@@ -30,6 +30,7 @@ public class CartsTableModel implements Serializable {
         this.mqunatity_product = mqunatity_product;
         this.mprice = mprice;
         this.subprice = subpricr;
+        this.psize = psize;
     }
 
     public int getMcartsid() {

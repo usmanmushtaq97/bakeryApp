@@ -77,7 +77,7 @@ public class ProductDetails extends AppCompatActivity implements AdapterView.OnI
             }
         });
     }
-
+  // bind to view
     private void init() {
         viewPrice = findViewById(R.id.textView_price_);
         viewTitle = findViewById(R.id.product_title_);
@@ -87,14 +87,14 @@ public class ProductDetails extends AppCompatActivity implements AdapterView.OnI
         incrementButton = findViewById(R.id.button_increase);
         decrementButton = findViewById(R.id.button_less);
     }
-
+  // get data from adapter
     private void getInit() {
         Intent intent = getIntent();
         title = intent.getStringExtra("name");
         price = intent.getIntExtra("price", 0);
         Toast.makeText(this, "" + title + price, Toast.LENGTH_SHORT).show();
     }
-
+   // set data on view
     private void setDate() {
         viewPrice.setText("$" + String.valueOf(price));
         viewTitle.setText(title);
@@ -103,17 +103,19 @@ public class ProductDetails extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
       psize = parent.getItemAtPosition(position).toString();
+        Toast.makeText(this, ""+psize, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
+    // add data to sqlite
     private void AddDataInDB() {
         String pqty = viewQty.getText().toString();
-        final int qtyupdate = Integer.parseInt(pqty);
-        final int subPrice = qtyupdate * price;
+        int qtyupdate = Integer.parseInt(pqty);
+        int subPrice = qtyupdate * price;
+        //Toast.makeText(this, ""+psize, Toast.LENGTH_SHORT).show();
         dataBase.daoCarts().InsertCarts(new CartsTableModel(title, qtyupdate, price, subPrice,psize));
     }
 }

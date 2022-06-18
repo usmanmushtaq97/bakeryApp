@@ -30,7 +30,6 @@ tools:context=".CostumerActivity">
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -39,6 +38,7 @@ tools:context=".CostumerActivity">
             android:textSize="18dp" />
 
         <EditText
+            android:id="@+id/costumer_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
@@ -54,23 +54,23 @@ tools:context=".CostumerActivity">
             android:background="#D2D5BAEF" />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="1dp"
-            android:text="Costumer Name"
+            android:text="Costumer Email"
             android:textSize="18dp" />
 
         <EditText
+            android:id="@+id/email_costumer"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
+            android:inputType="textEmailAddress"
             android:hint="Your Answer" />
 
         <View
-            android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="15dp"
             android:layout_marginTop="15dp"
@@ -79,39 +79,38 @@ tools:context=".CostumerActivity">
         />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="1dp"
-            android:text="Costumer Name"
+            android:text="Phone Number"
             android:textSize="18dp" />
 
         <EditText
+            android:id="@+id/costumer_phone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
+            android:inputType="phone"
             android:layout_weight="1"
             android:hint="Your Answer" />
 
         <View
-            android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="10dp"
             android:background="#D2D5BAEF" />
-
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="1dp"
-            android:text="Costumer Name"
+            android:text="Delivery Address"
             android:textSize="18dp" />
 
         <EditText
+            android:id="@+id/addresseidit"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"

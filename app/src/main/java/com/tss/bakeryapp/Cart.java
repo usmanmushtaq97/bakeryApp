@@ -1,64 +1,135 @@
 package com.tss.bakeryapp;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Cart#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.tss.bakeryapp.DBhelperclasses.CartsTableModel;
+import com.tss.bakeryapp.DBhelperclasses.DataBaseCarts;
+
+import java.util.ArrayList;
+import java.util.List;
 public class Cart extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Cart() {
+    private Context mContext;
+    private RecyclerView mCategoryRV;
+    private CartsAdapter mCartsAdapter;
+    private static List<CartsTableModel> mlist;
+    private TextView mtextviewCountitem;
+    private TextView tv_totalprice;
+    private View view;
+    CardView cartsdetailslayout;
+    LinearLayout constraintLayout;
+    static DataBaseCarts dataBaseCarts;
+    TextView subtotal;
+    Button checkout;
+    Button continueShoping;
+    public void Carts() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Cart.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Cart newInstance(String param1, String param2) {
-        Cart fragment = new Cart();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    // attach context
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        setHasOptionsMenu(true);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        // access the data base instance
+        dataBaseCarts = DataBaseCarts.getInstance(mContext);
+        view = inflater.inflate(R.layout.fragment_carts, container, false);
+        //Inflate the layout for this fragment
+        ConviewWithId();
+        mlist = new ArrayList<>();
+        mlist = dataBaseCarts.daoCarts().getAll();
+        mCartsAdapter = new CartsAdapter(mContext, mlist);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        mCategoryRV.setLayoutManager(layoutManager);
+        mCategoryRV.setAdapter(mCartsAdapter);
+        mCartsAdapter.notifyDataSetChanged();
+        ShopingContinue();
+        AddItemCount();
+        // Toast.makeText(mContext, "total" + TotalPriceCount(), Toast.LENGTH_SHORT).show();
+        tv_totalprice.setText(String.valueOf(TotalPriceCount()) + "$");
+        subtotal.setText(String.valueOf(TotalPriceCount()) + "$");
+        checkout = view.findViewById(R.id.bt_check_out);
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setMessage("Are you Ready For CheckOut")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", (dialog, id) -> {
+                            Toast.makeText(mContext, "c", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(mContext, MainActivity.class);
+                            mContext.startActivity(intent);
+
+                        })
+                        .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+        return view;
+    }
+    // count the how many item in carts
+
+    private void AddItemCount() {
+        mCartsAdapter.ViabilityCarts(cartsdetailslayout,constraintLayout);
+    }
+    //connection with view
+    private void ConviewWithId() {
+        mCategoryRV = view.findViewById(R.id.cartsitem);
+        subtotal = view.findViewById(R.id.subtotal);
+        constraintLayout = view.findViewById(R.id.cartbg);
+        cartsdetailslayout = view.findViewById(R.id.carts_details_item);
+        tv_totalprice = view.findViewById(R.id.totalprice);
+        continueShoping = view.findViewById(R.id.continueShoping_id);
+    }
+    //let get start other shopping
+    private void ShopingContinue(){
+        continueShoping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, HomeActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+    }
+    // this method calculate the  total price
+    public static int TotalPriceCount() {
+        int totalprice = 0;
+        int shiping = 0;
+        mlist = dataBaseCarts.daoCarts().getAll();
+        for (CartsTableModel dataBaseCarts : mlist) {
+            totalprice += dataBaseCarts.getMprice();
+        }
+
+        return totalprice+shiping;
     }
 }

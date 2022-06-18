@@ -41,17 +41,16 @@
             android:textSize="18dp" />
 
         <RadioGroup
+            android:id="@+id/radio_group_ordertype"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <RadioButton
-                android:id="@+id/radioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Delivery" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pickup" />
@@ -81,6 +80,7 @@
             android:text="Date" />
 
         <EditText
+            android:id="@+id/date_id"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -113,6 +113,7 @@
             android:text="Time" />
 
         <EditText
+            android:id="@+id/edit_time"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_weight="1"
