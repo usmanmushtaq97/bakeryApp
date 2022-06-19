@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +13,6 @@ import android.widget.Toast;
 public class CostumerActivity extends AppCompatActivity {
    Button btNext;
    EditText editTextName, editTextEmail, editTextMobile, editTextDeliveryAddress;
-   String name,email, phone, address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +23,6 @@ public class CostumerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkValidation()) {
                     Intent intent = new Intent(CostumerActivity.this, PaymentActivity.class);
-                    intent.putExtra("name",name);
-                    intent.putExtra("phone", phone);
-                    intent.putExtra("email",email);
-                    intent.putExtra("address", address);
                     startActivity(intent);
                 }
             }
@@ -45,24 +41,24 @@ public class CostumerActivity extends AppCompatActivity {
     }
     // validation of form
     private  boolean checkValidation(){
-        name= editTextName.getText().toString();
-        email = editTextEmail.getText().toString();
-       phone = editTextMobile.getText().toString();
-       address = editTextDeliveryAddress.getText().toString();
+        Constant.NAME= editTextName.getText().toString();
+        Constant.EMAIL = editTextEmail.getText().toString();
+       Constant.PHONE = editTextMobile.getText().toString();
+       Constant.ADDRESS = editTextDeliveryAddress.getText().toString();
 
-       if(name.isEmpty()){
+       if(Constant.NAME.isEmpty()){
            Toast.makeText(this, "Enter the Name", Toast.LENGTH_SHORT).show();
            return false;
        }
-       else if(email.isEmpty()){
+       else if(Constant.EMAIL.isEmpty()){
             Toast.makeText(this, "Enter the Email", Toast.LENGTH_SHORT).show();
             return false;
         }
-       else if(phone.isEmpty()){
+       else if(Constant.PHONE.isEmpty()){
             Toast.makeText(this, "Enter the Phone", Toast.LENGTH_SHORT).show();
             return false;
         }
-        else if(address.isEmpty()){
+        else if(Constant.ADDRESS.isEmpty()){
             Toast.makeText(this, "Enter the Address", Toast.LENGTH_SHORT).show();
             return false;
         }

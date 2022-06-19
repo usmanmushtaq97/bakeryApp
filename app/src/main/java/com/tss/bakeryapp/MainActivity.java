@@ -1,5 +1,9 @@
 package com.tss.bakeryapp;
 
+import static com.tss.bakeryapp.Constant.dateSelected;
+import static com.tss.bakeryapp.Constant.orderType;
+import static com.tss.bakeryapp.Constant.timeSelected;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.leanback.widget.picker.TimePicker;
@@ -27,9 +31,8 @@ public class MainActivity extends AppCompatActivity {
     int mHour, mMinute;
     RadioGroup radioGroupOderType;
     RadioButton radioButton;
-    String orderType;
-    String dateSelected;
-    String timeSelected;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +72,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (validation()) {
                     Intent intent = new Intent(MainActivity.this, CostumerActivity.class);
-                    intent.putExtra("date", dateSelected);
-                    intent.putExtra("time", timeSelected);
-                    intent.putExtra("orderType",orderType);
                     startActivity(intent);
                 }
             }
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     // check the Validation of form
     private boolean validation() {
         dateSelected = editTextDate.getText().toString();
-        timeSelected = editTextTime.getText().toString();
+       timeSelected = editTextTime.getText().toString();
         int selectedRadioButtonId = radioGroupOderType.getCheckedRadioButtonId();
         if (selectedRadioButtonId != -1) {
             radioButton = findViewById(selectedRadioButtonId);

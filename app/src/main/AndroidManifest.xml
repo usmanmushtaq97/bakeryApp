@@ -14,6 +14,9 @@
         android:theme="@style/Theme.BakeryApp"
         tools:targetApi="31">
         <activity
+            android:name=".OrderSummery"
+            android:exported="false" />
+        <activity
             android:name=".ProductDetails"
             android:exported="false" />
         <activity

@@ -32,7 +32,6 @@ public class Cart extends Fragment {
     private RecyclerView mCategoryRV;
     private CartsAdapter mCartsAdapter;
     private static List<CartsTableModel> mlist;
-    private TextView mtextviewCountitem;
     private TextView tv_totalprice;
     private View view;
     CardView cartsdetailslayout;

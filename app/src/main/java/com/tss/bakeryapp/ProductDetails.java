@@ -28,7 +28,7 @@ public class ProductDetails extends AppCompatActivity implements AdapterView.OnI
     Button incrementButton, decrementButton;
     Button addToCardButton;
     String title;
-   static String psize;
+    static String psize;
     DataBaseCarts dataBase;
     static int qty = 1;
     int price;
@@ -58,6 +58,7 @@ public class ProductDetails extends AppCompatActivity implements AdapterView.OnI
 
         // attaching data adapter to spinner
         sizeSpinner.setAdapter(dataAdapter);
+        //on click on qty btn+
         incrementButton.setOnClickListener(v -> {
             qty++;
             viewQty.setText(String.valueOf(qty));
